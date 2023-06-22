@@ -1,0 +1,110 @@
+Test for 1-my_list.py
+---------------------------------------
+
+case 0: import
+
+>>> MyList = __import__('1-my_list').MyList
+>>>
+
+---------------------------------------
+
+case 1: common case
+
+>>> my_list = MyList()
+>>> my_list.append(1)
+>>> my_list.append(4)
+>>> my_list.append(2)
+>>> my_list.append(3)
+>>> my_list.append(5)
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+>>>
+
+---------------------------------------
+
+case 2: Object not defined
+
+>>> MyList = __import__('1-my_list').MyList
+>>> my_list2.print_sorted()
+Traceback (most recent call last):
+    ...
+NameError: name 'my_list2' is not defined
+>>>
+
+---------------------------------------
+
+case 3: Passing a list
+
+>>> y = [41, 36, 37, 38]
+>>> my_list3 = MyList(y)
+>>> print(my_list3)
+[41, 36, 37, 38]
+>>> my_list3.print_sorted()
+[36, 37, 38, 41]
+>>>
+
+---------------------------------------
+
+case 4: Empty list
+
+>>> l = []
+>>> my_list4 = MyList(l)
+>>> my_list4.print_sorted()
+[]
+>>>
+
+---------------------------------------
+
+case 5: Unique Number
+
+>>> my_list5 = MyList()
+>>> my_list5.append(1)
+>>> my_list5.print_sorted()
+[1]
+>>> print(my_list5)
+[1]
+>>>
+
+---------------------------------------
+
+case 6: Same Number
+
+>>> my_list6 = MyList()
+>>> my_list6.append(5)
+>>> my_list6.append(5)
+>>> my_list6.append(5)
+>>> my_list6.append(5)
+>>> my_list6.append(5)
+>>> my_list6.print_sorted()
+[5, 5, 5, 5, 5]
+>>> print(my_list6)
+[5, 5, 5, 5, 5]
+>>>
+
+---------------------------------------
+
+case 7: Applying to Parent Object
+
+>>> my_list7 = [5, 6, 7]
+>>> my_list7.print_sorted()
+Traceback (most recent call last):
+    ...
+AttributeError: 'list' object has no attribute 'print_sorted'
+>>>
+
+---------------------------------------
+
+case 8: Passing Negative Numbers
+
+>>> my_list8 = MyList()
+>>> my_list8.append(-5)
+>>> my_list8.append(-56)
+>>> my_list8.append(-52)
+>>> my_list8.append(1)
+>>> my_list8.print_sorted()
+[-56, -52, -5, 1]
+>>>

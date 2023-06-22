@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git add . 
+git commit -m 'corrections'
+git push git@github.com:YeabkalW/alx-higher_level_programming.git

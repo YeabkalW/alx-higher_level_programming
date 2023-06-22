@@ -1,0 +1,4 @@
+#!/bin/bash
+git add .
+git commit -m 'Main Tasks Completed'
+git push git@github.com:YeabkalW/alx-higher_level_programming.git

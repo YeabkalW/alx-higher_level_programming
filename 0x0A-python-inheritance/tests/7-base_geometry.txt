@@ -1,0 +1,163 @@
+Test for 7-base_geometry.py
+---------------------------------------
+
+case 0: importing
+
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+>>>
+
+---------------------------------------
+
+case 1: Checking for DocString
+
+>>> D = __import__('7-base_geometry').__doc__
+>>> len(D) > 1
+True
+>>>
+
+---------------------------------------
+
+case 2: Checking for class DocString
+
+>>> N = __import__('7-base_geometry').BaseGeometry.__doc__
+>>> len(N) > 1
+True
+>>>
+
+---------------------------------------
+
+case 3: Checking for class method DocString
+
+>>> B = __import__('7-base_geometry').BaseGeometry.area.__doc__
+>>> len(B) > 1
+True
+>>> A = __import__('7-base_geometry').BaseGeometry.integer_validator.__doc__
+>>> len(A) > 1
+True
+>>>
+
+---------------------------------------
+
+case 4: Checking for Area() exception
+
+>>> b = BaseGeometry()
+>>> b.area()
+Traceback (most recent call last):
+    ...
+Exception: area() is not implemented
+>>>
+
+---------------------------------------
+
+case 5: Checking for arg overload for Area()
+
+>>> b.area(5)
+Traceback (most recent call last):
+    ...
+TypeError: BaseGeometry.area() takes 1 positional argument but 2 were given
+>>>
+
+---------------------------------------
+
+case 6: Checking the Integer_validator()
+
+>>> b.integer_validator('Integer', 45)
+>>>
+
+---------------------------------------
+
+case 7: Passing 0 to Integer_validator()
+
+>>> b.integer_validator('Zero', 0)
+Traceback (most recent call last):
+    ...
+ValueError: Zero must be greater than 0
+>>>
+
+---------------------------------------
+
+Case 8: Passing value less than 0 to Integer_valiator()
+
+>>> b.integer_validator('less', -6)
+Traceback (most recent call last):
+    ...
+ValueError: less must be greater than 0
+>>>
+
+---------------------------------------
+
+case 9: checking for non intger types
+
+>>> b.integer_validator("bool", True)
+Traceback (most recent call last):
+  ...
+TypeError: bool must be an integer
+>>> b.integer_validator("float", 1.5)
+Traceback (most recent call last):
+    ...
+TypeError: float must be an integer
+>>> b.integer_validator("complex", complex(1, 1))
+Traceback (most recent call last):
+    ...
+TypeError: complex must be an integer
+>>> b.integer_validator("string", "hello")
+Traceback (most recent call last):
+    ...
+TypeError: string must be an integer
+>>> b.integer_validator("tuple", (1, 2))
+Traceback (most recent call last):
+    ...
+TypeError: tuple must be an integer
+>>> b.integer_validator("list", [1, 2, 3])
+Traceback (most recent call last):
+    ...
+TypeError: list must be an integer
+>>> b.integer_validator("dict", {"key": "value"})
+Traceback (most recent call last):
+    ...
+TypeError: dict must be an integer
+>>> b.integer_validator("set", {"hello", "world"})
+Traceback (most recent call last):
+    ...
+TypeError: set must be an integer
+>>> b.integer_validator("frozenset", frozenset(["hello", "world"]))
+Traceback (most recent call last):
+    ...
+TypeError: frozenset must be an integer
+>>> b.integer_validator("bytes", b"bytes")
+Traceback (most recent call last):
+    ...
+TypeError: bytes must be an integer
+>>> b.integer_validator("bytearrays", bytearray(b"bytes"))
+Traceback (most recent call last):
+    ...
+TypeError: bytearrays must be an integer
+
+---------------------------------------
+
+case 9: No args passed
+
+>>> b.integer_validator()
+Traceback (most recent call last):
+    ...
+TypeError: BaseGeometry.integer_validator() missing 2 required positional arguments: 'name' and 'value'
+>>>
+
+---------------------------------------
+
+case 10: One arg passed
+
+>>> b.integer_validator("integer")
+Traceback (most recent call last):
+    ...
+TypeError: BaseGeometry.integer_validator() missing 1 required positional argument: 'value'
+
+---------------------------------------
+
+case 11: Too Many args passed
+
+>>> b.integer_validator("integer", 1, 2)
+Traceback (most recent call last):
+    ...
+TypeError: BaseGeometry.integer_validator() takes 3 positional arguments but 4 were given
+>>>

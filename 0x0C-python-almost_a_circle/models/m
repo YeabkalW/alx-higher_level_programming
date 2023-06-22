@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo cd ..
+echo cd tests/
+echo cd main_files/
