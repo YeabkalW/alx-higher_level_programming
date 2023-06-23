@@ -1,40 +1,19 @@
 #!/usr/bin/python3
-"""script that takes in the name of a state as an argument
-and lists all cities of that state"""
+"""Lists states"""
 
 import MySQLdb
-import sys
+from sys import argv
 
-
-def protect(str):
-    """Protects database from SQL injection"""
-    proof = str.replace(";", "';").replace("\\", "\\\\").replace("'", "''")
-    return proof
-
-
-username = sys.argv[1]
-password = sys.argv[2]
-database = sys.argv[3]
-statename = protect(sys.argv[4])
-
-db = MySQLdb.connect(host='localhost', user=username,
-                     passwd=password, database=database,
-                     port=3306)
-
-cur = db.cursor()
-query = "SELECT cities.name FROM cities JOIN states\
-         ON cities.state_id = states.id WHERE states.name LIKE '%s' ORDER\
-         BY cities.id ASC;" % statename
-cur.execute(query)
-
-cities = []
-for i in cur:
-    cities.append(i[0])
-
-print(", ".join(cities))
-
-cur.close()
-db.close()
-
-if __name__ == '__main__':
-    pass
+if __name__ == "__main__":
+    conn = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
+                           passwd=argv[2], db=argv[3], charset="utf8")
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT cities.name FROM cities
+        JOIN states ON cities.state_id = states.id
+        WHERE states.name = %s
+        ORDER BY cities.id ASC
+        """, (argv[4], ))
+    print(", ".join(map(lambda x: x[0], cur.fetchall())))
+    cur.close()
+    conn.close()

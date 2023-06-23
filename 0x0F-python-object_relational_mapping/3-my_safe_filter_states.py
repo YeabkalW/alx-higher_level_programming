@@ -1,34 +1,17 @@
 #!/usr/bin/python3
-"""srript that takes in an argument and displays all values in the table
-where name matches the argument"""
+"""Lists states"""
 
 import MySQLdb
-import sys
-
-def protect(str):
-    """removes special characters"""
-    protected = str.replace("'", "''").replace("\\", "\\\\").replace(";", "';")
-    return protected
-
-username = sys.argv[1]
-password = sys.argv[2]
-database = sys.argv[3]
-statename = protect(sys.argv[4])
-
-db = MySQLdb.connect(host='localhost', user=username,
-                     passwd=password, database=database,
-                     port=3306)
-
-cur = db.cursor()
-query = "SELECT id, name FROM states WHERE name LIKE '%s' ORDER BY id ASC"\
-         %statename
-cur.execute(query)
-
-for i in cur:
-    print(i)
-
-cur.close()
-db.close()
+from sys import argv
 
 if __name__ == "__main__":
-    pass
+    conn = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
+                           passwd=argv[2], db=argv[3], charset="utf8")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM states WHERE name = %s ORDER BY states.id ASC",
+                (argv[4], ))
+    query_rows = cur.fetchall()
+    for row in query_rows:
+        print(row)
+    cur.close()
+    conn.close()
