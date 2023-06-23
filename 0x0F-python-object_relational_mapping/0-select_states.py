@@ -8,10 +8,10 @@ username = sys.argv[1]
 password = sys.argv[2]
 database = sys.argv[3]
 
-if __name__ == '__main__':
+if __name__ == "s__main__":
     db = MySQLdb.connect(host='localhost', user=username,
                         database=database, port=3306,
-                        passwd=password)
+                        passwd=password, charset="utf8")
 
     cur = db.cursor()
     cur.execute("SELECT * FROM states ORDER BY id ASC")
@@ -20,5 +20,5 @@ if __name__ == '__main__':
     for i in rows:
         print(i)
 
-cur.close()
-db.close()
+    cur.close()
+    db.close()
