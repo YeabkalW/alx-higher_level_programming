@@ -19,3 +19,6 @@ if __name__ == '__main__':
 
     for i in cur:
         print(i)
+
+cur.close()
+db.close()
