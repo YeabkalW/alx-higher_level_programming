@@ -14,10 +14,10 @@ if __name__ == '__main__':
                         passwd=password)
 
     cur = db.cursor()
-    query = "SELECT * FROM states ORDER BY id ASC"
-    cur.execute(query)
+    cur.execute("SELECT * FROM states ORDER BY id ASC")
+    rows = cur.fetchall()
 
-    for i in cur:
+    for i in rows:
         print(i)
 
 cur.close()
